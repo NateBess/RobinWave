@@ -1,0 +1,1 @@
+pyinstaller main.py --onefile --name RobinWave --distpath compile
