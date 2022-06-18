@@ -1,4 +1,5 @@
 import spreads
+import robin_stocks.robinhood.authentication as auth
 #
 #   The code below here is ONLY for the menu and navigation of RobinWave, please keep all behind the scenes code above this note...
 #
@@ -53,6 +54,10 @@ def choosePutSpreads():
         print("\nSomething went wrong, please try again...\n")
         chooseBesslerSpreads()
 
+def logout():
+    auth.logout()
+    print("Logout Successful")
+
 
 def chooseMenu():
     print("Welcome to Robin-Wave...\n")
@@ -60,6 +65,7 @@ def chooseMenu():
     print("- Bessler Spreads ")
     print("- Call Calendar Spreads ")
     print("- Put Calendar Spreads ")
+    print("- Logout ")
     print("\nPlease type: Bessler, Call, or Put to make your selection...")
     
     def menuOptions():
@@ -70,6 +76,8 @@ def chooseMenu():
             chooseCallSpreads()
         elif whatNow.startswith("p"):
             choosePutSpreads()
+        elif whatNow.startswith("l"):
+            logout()
         elif whatNow == 'end':
             x = input("Client is now broken... hit ENTER to close...")
         else:

@@ -1,35 +1,19 @@
 import robin_stocks.robinhood as r
-import menu
-import charting
+import menuOptions
 
 
 # trys to open the Account.txt file with username and password and then grabs them and puts them in the designated variables.
 try:
     with open("Account.txt", "r") as accountFile:
-        username = accountFile.readline().rstrip("\n").strip("Username: ").strip()
-        password = accountFile.readline().rstrip("\n").strip("Password: ").strip()
+        username = accountFile.readline().rstrip("\n").strip("User: ")
+        password = accountFile.readline().rstrip("\n").strip("Pass: ")
 except:
-    with open("Account.txt", "w+") as accountFile:
-        infoCheck = False
-        username = input("Enter Username: ")
-        password = input("Enter Password: ")
-        while not infoCheck:
-            print("\nIs This Information Correct?")
-            print("Username: "+str(username))
-            print("Password: "+str(password))
-            userAnswer = input("Yes Or No ---> ")
-
-            if userAnswer.startswith('y') or userAnswer.startswith('Y'):
-                accountFile.write("Username: "+str(username)+"\n")
-                accountFile.write("Password: "+str(password)+"\n")
-                infoCheck = True
-            else:
-                infoCheck = False
-                username = input("Re-Enter Username: ").strip()
-                password = input("Re-Enter Password: ").strip()
+    with open("Account.txt", "a+") as accountFile:
+        username = "User"
+        password = "Pass"
 
 
-print("\n= Currently Trying To Login as: '"+str(username)+"'")
+print("\n= Currently Trying To Login as: "+str(username))
 
 
 # Variables For Loggin In...
@@ -55,7 +39,7 @@ print("\n= Account Balance: ${:,.2f} \n".format(accountBalance()))
 
 
 
-menu.chooseMenu()
+menuOptions.chooseMenu()
 
 
 
