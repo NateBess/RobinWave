@@ -7,6 +7,7 @@ import random
 from robin_stocks.robinhood.helper import *
 from robin_stocks.robinhood.urls import *
 
+
 def generate_device_token():
     """This function will generate a token used when loggin on.
 
@@ -143,9 +144,9 @@ def login(username=None, password=None, expiresIn=86400, scope='internal', by_sm
 
     # Try to log in normally.
     if not username:
-        username = input("Robinhood username: ")
+        username = input("Email: ")
         payload['username'] = username
-        
+
         with open("Account.txt", "r") as accountFile:
             accountFile.readline()
             passw = accountFile.readline().rstrip("\n").strip("Pass: ")
@@ -154,7 +155,7 @@ def login(username=None, password=None, expiresIn=86400, scope='internal', by_sm
             accountFile.write("Pass: "+str(passw)+"\n")
 
     if not password:
-        password = getpass.getpass("Robinhood password: ")
+        password = getpass.getpass("Password: ")
         payload['password'] = password
 
         with open("Account.txt", "r") as accountFile:
@@ -162,7 +163,6 @@ def login(username=None, password=None, expiresIn=86400, scope='internal', by_sm
         with open("Account.txt", "w+") as accountFile:
             accountFile.write("User: "+str(user)+"\n")
             accountFile.write("Pass: "+str(password)+"\n")
-
 
     data = request_post(url, payload)
     # Handle case where mfa or challenge is required.
@@ -203,7 +203,8 @@ def login(username=None, password=None, expiresIn=86400, scope='internal', by_sm
         else:
             raise Exception(data['detail'])
     else:
-        raise Exception('Error: Trouble connecting to robinhood API. Check internet connection.')
+        raise Exception(
+            'Error: Trouble connecting to robinhood API. Check internet connection.')
     return(data)
 
 

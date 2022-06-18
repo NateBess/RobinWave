@@ -27,7 +27,7 @@ mfa_code = None
 
 # Logs into your robinhood account using just your username and your password.
 login_response = r.authentication.login(username, password, expiresIn, scope, by_sms, store_session, mfa_code)
-accessToken = str(login_response["token_type"])
+# logout = r.logout()
 
 
 # This Will Show the Current Account Balance
