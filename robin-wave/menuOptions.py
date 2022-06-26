@@ -58,9 +58,21 @@ def choosePutSpreads():
         chooseBesslerSpreads()
 
 
-def logout():
+def switchAccount():
+    # Variables For Loggin In...
+    username = None
+    password = None
+    expiresIn = 8640000
+    scope = 'internal'
+    by_sms = True
+    store_session = False
+    mfa_code = None
+
+    # Logs into your robinhood account using just your username and your password.
+    auth.login(username, password, expiresIn, scope, by_sms, store_session, mfa_code)
     auth.logout()
-    print("Logout Successful")
+    with open("Account.txt", "w+") as accountFile:
+        print("Logout Successful")
 
 
 def chooseMenu():
@@ -69,7 +81,7 @@ def chooseMenu():
     print("- Bessler Spreads ")
     print("- Call Calendar Spreads ")
     print("- Put Calendar Spreads ")
-    print("- Logout ")
+    print("- Switch Account ")
     print("\nPlease type: Bessler, Call, or Put to make your selection...")
 
     def menuOptions():
@@ -80,8 +92,8 @@ def chooseMenu():
             chooseCallSpreads()
         elif whatNow.startswith("p"):
             choosePutSpreads()
-        elif whatNow.startswith("l"):
-            logout()
+        elif whatNow.startswith("s"):
+            switchAccount()
         elif whatNow == 'end':
             x = input("Client is now broken... hit ENTER to close...")
         else:
